@@ -1,9 +1,9 @@
 
 #' Aligns peptides in a pepTraces object to a reference genome
-#'
+#' @importFrom pbapply pbapply
 #' @return A GRangesList object with the genomic position of the found peptides
 
-alignPeptides <- function(pepTraces, exon, proteinseq,
+alignPepTraces <- function(pepTraces, exon, proteinseq,
                           mapIDs = FALSE, mappingTable = NULL)
 {
   # Remove Decoys
@@ -16,8 +16,8 @@ alignPeptides <- function(pepTraces, exon, proteinseq,
   # cl <- makeCluster(4)
   # alignment <- parLapply(cl,traces$id, alignPeptideToGene, exon, proteinseq, traces, idmap)
   # stopCluster(cl)
-  alignment <- pblapply(traces, 1, function(trace){
-    alignPeptideToGene(trace$id, trace$protein_id, exon, proteinseq, idmap)
+  alignment <- pbapply(traces, 1, function(trace){
+    alignPeptideToGene(trace["id"], trace["protein_id"], exon, proteinseq, idmap)
   })
   names(alignment) <- traces$id
   alignment[sapply(alignment, is.null)] <- NULL

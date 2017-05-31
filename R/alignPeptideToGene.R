@@ -40,7 +40,7 @@ alignPeptideToGene <- function(peptide,geneID, exon, proteinseq, idmap){
 #' @param exon A \code{data.table} with exon information, obtained by a download function(see ...)
 #' @param proteinseq a table with protein sequences for every transcript in the reference genome.
 #' @return A GRanges object with the genomic coordinates of the queried peptide
-
+#' @importFrom  Biostrings AAString
 #' @importFrom  Biostrings matchPattern
 #' @import GenomicRanges
 

@@ -21,8 +21,13 @@ pepTraces_test <- subset(pepTraces, testpeps)
 
 exon_test <- as.data.table(exon)
 exon_test <- exon_test[gene_name %in% c(prot1, prot2)]
+setkey(exon_test, tx_name)
+
+idmap_test <- exon_test[,.(gene_name, tx_name)]
+setkey(idmap_test, gene_name)
+
 
 proteinseq_test <- as.data.table(proteinseq)
 proteinseq_test <- proteinseq_test[tx_name %in% testtranscripts]
 
-devtools::use_data(pepTraces_test, proteinseq_test, exon_test)
+devtools::use_data(pepTraces_test, proteinseq_test, exon_test, idmap_test)

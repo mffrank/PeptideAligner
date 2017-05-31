@@ -7,17 +7,18 @@
 #' @return A GRanges object with the genomic coordinates of the queried peptide
 #' @import GenomicRanges
 
-addProteinNames <- function(alignment, idmap){
+addProteinNames <- function(alignment, pep_idmap){
   stopifnot(class(alignment) == "GRangesList")
-  stopifnot(class(idmap) %in% "data.table")
-  stopifnot(c("id", "protein_id") %in% names(idmap))
+  stopifnot("data.table" %in% class(pep_idmap))
+  stopifnot(c("id", "protein_id") %in% names(pep_idmap))
 
-  res <- GRangesList()
-  setkey(idmap, "protein_id")
-  res <- lapply(idmap$protein_id, function(x){
-    pep_ids <- idmap[.(x), id]
-    alignment[pep_ids]
+  setkey(pep_idmap, "protein_id")
+  proteinIDs <- unique(pep_idmap$protein_id)
+  res <- lapply(proteinIDs, function(x){
+    pep_ids <- pep_idmap[.(x), id]
+    unlist(alignment[pep_ids])
   })
-  res <- do.call("append", res)
+  names(res) <- proteinIDs
+  res <- GRangesList(res)
   return(res)
 }

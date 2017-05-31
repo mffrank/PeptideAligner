@@ -3,4 +3,6 @@
 export(alignPeptideToGene)
 import(GenomicRanges)
 import(data.table)
+importFrom(Biostrings,AAString)
 importFrom(Biostrings,matchPattern)
+importFrom(pbapply,pbapply)
