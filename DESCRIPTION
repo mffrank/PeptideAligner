@@ -1,0 +1,15 @@
+Package: PeptideAligner
+Type: Package
+Title: Align Peptides to a reference Genome
+Version: 0.1.0
+Author: Max Frank
+Maintainer: Max Frank <mfrank@ethz.ch>
+Description: Align Peptides to a reference genome to obtain the genomic location
+    of a peptide.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports:
+  Granges,
+  Biostrings
+RoxygenNote: 5.0.1
