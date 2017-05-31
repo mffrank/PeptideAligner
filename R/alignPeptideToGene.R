@@ -42,7 +42,7 @@ alignPeptideToGene <- function(peptide,geneID, exon, proteinseq, idmap){
 #' @return A GRanges object with the genomic coordinates of the queried peptide
 
 #' @importFrom  Biostrings matchPattern
-#' @import GRanges
+#' @import GenomicRanges
 
 alignPeptideToTranscript <- function(peptide, transcriptID, exon, proteinseq){
 
